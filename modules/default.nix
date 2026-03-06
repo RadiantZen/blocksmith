@@ -9,8 +9,8 @@ let
     with lib.types;
     submodule {
       options = {
-        rootPool = lib.mkOptions { type = with lib.types; str; };
-        zfsDatasetsList = lib.mkOptions { type = with lib.types; listOf str; };
+        rootPool = lib.mkOption { type = with lib.types; str; };
+        zfsDatasetsList = lib.mkOption { type = with lib.types; listOf str; };
       };
     };
 in
