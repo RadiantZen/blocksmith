@@ -17,7 +17,7 @@ in
 {
   options.blocksmith = {
     enable = lib.mkEnableOption "blocksmith";
-    rootZfs = lib.mkOptions { type = rootZfsModule; };
+    rootZfs = lib.mkOption { type = rootZfsModule; };
   };
 
   config = lib.mkIf config.blocksmith.enable {
