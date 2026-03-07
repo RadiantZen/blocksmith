@@ -70,7 +70,6 @@ in
                 device = "${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPool}${dir}";
                 fsType = "zfs";
                 options = [ "zfsutil" ];
-                neededForBoot = true;
               };
             }) config.blocksmith.rootZfs.zfsDatasetList
           )
