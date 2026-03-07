@@ -8,6 +8,7 @@ let
         rootPool = lib.mkOption { type = with lib.types; str; };
         rootPrefixDataset = lib.mkOption { type = with lib.types; str; };
         zfsDatasetList = lib.mkOption { type = with lib.types; listOf str; };
+        persistentDatasets = lib.mkOption { type = with lib.types; listOf str; };
       };
     };
 in
@@ -52,15 +53,28 @@ in
           };
         }
         (
-          lib.attrsets.mergeAttrsList (
-            builtins.map (dir: {
-              ${dir} = {
-                device = "${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPool}${dir}";
-                fsType = "zfs";
-                options = [ "zfsutil" ];
-              };
-            }) config.blocksmith.rootZfs.zfsDatasetList
-          )
+          lib.mergeAttrs
+            (lib.attrsets.mergeAttrsList (
+              builtins.map (dir: {
+                ${dir} = {
+                  device = "${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPool}${dir}";
+                  fsType = "zfs";
+                  options = [ "zfsutil" ];
+                };
+              }) config.blocksmith.rootZfs.zfsDatasetList
+            ))
+            (
+              lib.attrsets.mergeAttrsList (
+                builtins.map (dir: {
+                  ${dir} = {
+                    device = "${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPool}${dir}";
+                    fsType = "zfs";
+                    options = [ "zfsutil" ];
+                    neededForBoot = true;
+                  };
+                }) config.blocksmith.rootZfs.persistentDatasets
+              )
+            )
         );
   };
 }
