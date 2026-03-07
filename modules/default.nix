@@ -32,13 +32,16 @@ in
         Type = "oneshot";
       };
       script = ''
-        zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/root@blank && echo "rollback: /"
-        zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/tmp@blank && echo "rollback: /tmp"
-        zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/var@blank && echo "rollback: /var"
-        zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/var/lib@blank && echo "rollback: /var/lib"
-
         echo ">> >> rollback complete << <<"
       '';
+      # script = ''
+      #   zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/root@blank && echo "rollback: /"
+      #   zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/tmp@blank && echo "rollback: /tmp"
+      #   zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/var@blank && echo "rollback: /var"
+      #   zfs rollback -r ${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/var/lib@blank && echo "rollback: /var/lib"
+      #
+      #   echo ">> >> rollback complete << <<"
+      # '';
     };
 
     # TODO check if needed
