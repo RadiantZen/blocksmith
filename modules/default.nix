@@ -60,7 +60,7 @@ in
             device = "${config.blocksmith.rootZfs.rootPool}/${config.blocksmith.rootZfs.rootPrefixDataset}/persistent";
             fsType = "zfs";
             options = [ "zfsutil" ];
-            neededForBoot = true;
+            # neededForBoot = true;
           };
         }
         (
